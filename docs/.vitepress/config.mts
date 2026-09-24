@@ -60,10 +60,19 @@ export default withMermaid(
           ]
         },
         {
+          text: '试题二：数据库系统设计 (E-R与SQL)',
+          collapsed: false,
+          items: [
+            { text: '00 核心铁律与规范化方法论', link: '/pm-application/02-database-design/' },
+            { text: '01 案例：高校教务排课与成绩管理系统', link: '/pm-application/02-database-design/01-case-academic-scheduling' },
+            { text: '02 案例：智慧物流仓储与配送调度系统', link: '/pm-application/02-database-design/02-case-smart-logistics' },
+            { text: '03 案例：连锁超市会员销售与供应链系统', link: '/pm-application/02-database-design/03-case-retail-membership' }
+          ]
+        },
+        {
           text: '其他大题专栏',
           collapsed: false,
           items: [
-            { text: '试题二：数据库系统设计 (E-R与SQL)', link: '/pm-application/02-database-design/' },
             { text: '试题三：面向对象 UML 系统建模', link: '/pm-application/03-uml-modeling/' },
             { text: '试题四：C 语言算法设计与分析', link: '/pm-application/04-algorithm-analysis/' },
             { text: '试题六：面向对象与设计模式 (Java)', link: '/pm-application/05-design-patterns-java/' }
