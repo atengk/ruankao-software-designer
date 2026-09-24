@@ -2,6 +2,7 @@
   "name": "ruankao-software-designer",
   "version": "1.0.0",
   "description": "软考软件设计师（中级）系统化备考工程与知识库",
+  "packageManager": "pnpm@11.21.0",
   "type": "module",
   "scripts": {
     "docs:dev": "vitepress dev docs",
