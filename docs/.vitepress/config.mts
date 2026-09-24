@@ -1,6 +1,8 @@
 import { defineConfig } from 'vitepress'
+import { withMermaid } from 'vitepress-plugin-mermaid'
 
-export default defineConfig({
+export default withMermaid(
+  defineConfig({
   base: '/ruankao-software-designer/',
   lang: 'zh-CN',
   title: '软考软件设计师',
@@ -164,4 +166,4 @@ export default defineConfig({
       label: '本页导读'
     }
   }
-})
+}))
