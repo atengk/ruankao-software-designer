@@ -7,6 +7,7 @@ cache/
 
 # 本地临时工单与临时探针
 scratch/
+.scratch/
 
 # IDE 与操作系统
 .DS_Store
