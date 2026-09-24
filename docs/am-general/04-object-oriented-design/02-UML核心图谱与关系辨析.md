@@ -3,7 +3,7 @@
 <Badge type="info" text="MOD-04 面向对象" />
 <Badge type="tip" text="考查题号：上午第 40 ~ 44 题 (约 3 ~ 4 分)" />
 <Badge type="danger" text="⭐⭐⭐⭐⭐ 5星必考" />
-<Badge type="success" text="强贯通下午 (下午题3 必考15分)" />
+<Badge type="tip" text="强贯通下午 (下午题3 必考15分)" />
 
 ::: tip 🎯 45 分及格通关指引
 - **【45分必背核心得分点】**：

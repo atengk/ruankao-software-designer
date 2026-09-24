@@ -8,7 +8,7 @@
 .mermaid {
   display: flex;
   justify-content: center;
-  margin: 1.5rem 0;
+  margin: 1.75rem 0 !important;
   overflow-x: auto;
 }
 
@@ -39,4 +39,80 @@
   background-color: var(--vp-c-bg) !important;
   padding: 0 4px !important;
   border-radius: 4px;
+}
+
+/* -------------------------------------------------------------
+   全局中文字体栈、呼吸感与垂直节奏优化 (Typography & Spacing)
+------------------------------------------------------------- */
+:root {
+  --vp-font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+}
+
+/* 1. 页面大标题与次级标题呼吸感 */
+.vp-doc h1 {
+  margin-top: 0.5rem !important;
+  margin-bottom: 1.25rem !important;
+  line-height: 1.35 !important;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.vp-doc h2 {
+  margin-top: 2.5rem !important;
+  margin-bottom: 1rem !important;
+  padding-top: 0.5rem;
+}
+
+.vp-doc h3 {
+  margin-top: 1.75rem !important;
+  margin-bottom: 0.75rem !important;
+}
+
+/* 2. 顶部徽章流 (Badges) 自动弹性排列与充裕留白 */
+.vp-doc .VPBadge {
+  margin: 0 !important;
+  padding: 5px 12px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  line-height: 1.4 !important;
+  border-radius: 6px !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* 解决标题下方 Badge 段落与接下来内容拥挤的问题 */
+.vp-doc p:has(.VPBadge),
+.vp-doc .badge-group {
+  margin-top: 0.75rem !important;
+  margin-bottom: 2rem !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 0.6rem 0.75rem !important;
+}
+
+/* 3. 增强原生容器 (tip, danger, details) 的呼吸感 */
+.vp-doc .custom-block {
+  margin: 1.75rem 0 !important;
+  padding: 1rem 1.25rem !important;
+  border-radius: 8px !important;
+  line-height: 1.7 !important;
+}
+
+.vp-doc .custom-block summary {
+  cursor: pointer;
+  font-weight: 600;
+  padding: 0.25rem 0;
+}
+
+/* 4. 真题选项列表优雅分层 */
+.vp-doc ul {
+  padding-left: 1.25rem;
+  margin: 0.75rem 0 1.25rem 0;
+}
+
+.vp-doc ul > li {
+  margin: 0.4rem 0 !important;
+  line-height: 1.65 !important;
 }
