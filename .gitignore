@@ -4,6 +4,9 @@ docs/.vitepress/dist/
 docs/.vitepress/cache/
 dist/
 cache/
+target/
+**/target/
+*.class
 
 # 本地临时工单与临时探针
 scratch/

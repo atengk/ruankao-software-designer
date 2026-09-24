@@ -36,9 +36,31 @@ export default withMermaid(
     nav: [
       { text: '首页', link: '/' },
       { text: '上午综合知识', link: '/am-general/' },
+      { text: '下午应用技术', link: '/pm-application/' },
       { text: '架构决策 (ADR)', link: '/adr/0001-上午题知识库结构与优先攻坚策略' }
     ],
     sidebar: {
+      '/pm-application/': [
+        {
+          text: '下午应用技术概览',
+          items: [
+            { text: '🎯 通关全景图与及格攻防矩阵', link: '/pm-application/' },
+            { text: '📐 万能采分公式与速记手册', link: '/pm-application/answer-templates' },
+            { text: '🛡️ 机考上机作答与防坑指南', link: '/pm-application/cbt-guidelines' }
+          ]
+        },
+        {
+          text: '试题精解与实战专栏',
+          collapsed: false,
+          items: [
+            { text: '试题一：结构化分析与数据流图 (DFD)', link: '/pm-application/01-data-flow-diagram/' },
+            { text: '试题二：数据库系统设计 (E-R与SQL)', link: '/pm-application/02-database-design/' },
+            { text: '试题三：面向对象 UML 系统建模', link: '/pm-application/03-uml-modeling/' },
+            { text: '试题四：C 语言算法设计与分析', link: '/pm-application/04-algorithm-analysis/' },
+            { text: '试题六：面向对象与设计模式 (Java)', link: '/pm-application/05-design-patterns-java/' }
+          ]
+        }
+      ],
       '/am-general/': [
         {
           text: '上午综合知识概览',

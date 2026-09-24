@@ -7,7 +7,9 @@
   "scripts": {
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:preview": "vitepress preview docs",
+    "test:java": "mvn -f exam-java/pom.xml test",
+    "test": "pnpm run docs:build && pnpm run test:java"
   },
   "devDependencies": {
     "markdown-it-mathjax3": "^5.2.0",
