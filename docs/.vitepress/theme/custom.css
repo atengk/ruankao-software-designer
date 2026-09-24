@@ -116,3 +116,32 @@
   margin: 0.4rem 0 !important;
   line-height: 1.65 !important;
 }
+
+/* -------------------------------------------------------------
+   MathJax 数学公式无障碍元素隐藏 (彻底消除 nn, kk, 2^k 2^k 重影)
+------------------------------------------------------------- */
+mjx-assistive-mml {
+  display: none !important;
+  visibility: hidden !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  clip-path: inset(50%) !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+  pointer-events: none !important;
+}
+
+/* 保证 MathJax SVG 容器垂直居中对齐 */
+mjx-container[jax="SVG"] {
+  display: inline-block !important;
+  vertical-align: -0.15em !important;
+  line-height: 0 !important;
+}
+
