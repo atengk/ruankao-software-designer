@@ -55,12 +55,18 @@ flowchart TD
 ## 三、 知识专栏与核心资产导航
 
 ### 3.1 试题精解与案例实战专栏
-1. [试题一：结构化分析与数据流图 (DFD)](./01-data-flow-diagram/) —— 父子图平衡、黑洞/灰洞排错、电商/医院/仓储三案精析；
-2. [试题二：数据库系统设计 (E-R 与 SQL)](./02-database-design/) —— 联系转换铁律、主外键推导模型、规范化理论与 SQL 填空；
-3. [试题三：面向对象 UML 系统建模](./03-uml-modeling/) —— 类间强弱耦合阶梯、用例图关系口诀、状态机与时序图精析；
-4. [试题四：C 语言算法设计与分析](./04-algorithm-analysis/) —— 动态规划、贪心、分治、回溯四大宗门模版与 7 分防守策略；
-5. [试题六：面向对象与设计模式 (Java)](./05-design-patterns-java/) —— 7 大高频设计模式类图解析、机考题眼与 Java 双轨实战工程。
+1. **[试题一：结构化分析与数据流图 (DFD)](./01-data-flow-diagram/)**（必答 · 15分）
+   - [00 核心法则与异常排查方法论](./01-data-flow-diagram/) · [01 电商订单与支付](./01-data-flow-diagram/01-case-ecommerce-orders) · [02 智慧医院门诊挂号](./01-data-flow-diagram/02-case-hospital-outpatient) · [03 智能仓储出入库物流](./01-data-flow-diagram/03-case-smart-warehouse)
+2. **[试题二：数据库系统设计 (E-R 与 SQL)](./02-database-design/)**（必答 · 15分）
+   - [00 核心铁律与规范化方法论](./02-database-design/) · [01 高校教务排课与成绩](./02-database-design/01-case-academic-scheduling) · [02 智慧物流仓储调度](./02-database-design/02-case-smart-logistics) · [03 连锁超市销售与供应链](./02-database-design/03-case-retail-membership)
+3. **[试题三：面向对象 UML 系统建模](./03-uml-modeling/)**（必答 · 15分）
+   - [00 核心法则与图元建模方法论](./03-uml-modeling/) · [01 智能车载导航与ADAS](./03-uml-modeling/01-case-vehicle-navigation) · [02 线上多渠道聚合支付网关](./03-uml-modeling/02-case-online-payment-gateway) · [03 敏捷项目看板协同研发](./03-uml-modeling/03-case-agile-kanban-collaboration)
+4. **[试题四：C 语言算法设计与分析](./04-algorithm-analysis/)**（必答 · 15分）
+   - [00 战略防守法则与四大宗门识别](./04-algorithm-analysis/) · [01 动态规划：背包与LCS](./04-algorithm-analysis/01-dynamic-programming-knapsack-lcs) · [02 分治与贪心：快排与最短路径](./04-algorithm-analysis/02-divide-conquer-and-greedy) · [03 回溯搜索：N 皇后与剪枝](./04-algorithm-analysis/03-backtracking-n-queens)
+5. **[试题六：面向对象与设计模式 (Java 选做)](./05-design-patterns-java/)**（选做 · 15分）
+   - [00 7 大高频设计模式全景矩阵与五空秒杀](./05-design-patterns-java/) · `exam-java` 纯净双轨工程（策略、观察者、装饰器、工厂方法、适配器、命令、状态）17 个单元测试全绿。
 
-### 3.2 跨题型通用通关秘籍
-- [📐 下午应用技术万能采分公式手册](./answer-templates) —— 集中汇总 DFD 查漏法则、E-R 转换律、UML 判别口诀与算法识别表；
-- [🛡️ 机考常态化上机作答规范与高频避坑手册](./cbt-guidelines) —— 机考答题文本框规范、符号防错、时间管理与真题作答套路。
+### 3.2 跨题型通用通关秘籍与决策规范
+- **[📐 下午应用技术万能采分公式手册](./answer-templates)** —— 集中横向汇总全卷 5 题的判别公式、属性闭包算法、无损连接证明与速记口诀；
+- **[🛡️ 机考常态化上机作答规范与高频避坑手册](./cbt-guidelines)** —— 选做题防漏选标记、文本框输入排版、符号全角错判防御、150分钟黄金答题节奏与考场应急预案；
+- **[🏛️ ADR 0007 架构决策记录](/adr/0007-下午应用技术知识库架构与Java实战工程规范)** —— 下午应用技术知识库架构与 Java 实战工程建设技术规范。
