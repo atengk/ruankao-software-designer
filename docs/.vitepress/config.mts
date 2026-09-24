@@ -36,14 +36,27 @@ export default withMermaid(
     nav: [
       { text: '首页', link: '/' },
       { text: '上午综合知识', link: '/am-general/' },
+      { text: '📊 机考趋势与通关策略', link: '/research/2026-ruankao-designer-exam-trends-and-strategy' },
       { text: '架构决策 (ADR)', link: '/adr/0001-上午题知识库结构与优先攻坚策略' }
     ],
     sidebar: {
+      '/research/': [
+        {
+          text: '备考调研白皮书',
+          items: [
+            { text: '📊 2026机考趋势与通关策略', link: '/research/2026-ruankao-designer-exam-trends-and-strategy' },
+            { text: '📖 上午综合知识备考导航', link: '/am-general/' },
+            { text: '📐 全科计算公式速查手册', link: '/am-general/formula-cheat-sheet' },
+            { text: '🛡️ 全科高频避坑与秒杀模板库', link: '/am-general/exam-pitfalls-and-short-cuts' }
+          ]
+        }
+      ],
       '/am-general/': [
         {
           text: '上午综合知识概览',
           items: [
             { text: '考情分析与学科导航', link: '/am-general/' },
+            { text: '📊 2026机考趋势与通关策略', link: '/research/2026-ruankao-designer-exam-trends-and-strategy' },
             { text: '📐 全科计算公式速查手册', link: '/am-general/formula-cheat-sheet' },
             { text: '🛡️ 全科高频避坑与秒杀模板库', link: '/am-general/exam-pitfalls-and-short-cuts' }
           ]
