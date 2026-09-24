@@ -1,0 +1,42 @@
+/* -------------------------------------------------------------
+   Mermaid 流程图与矢量图全局排版优化
+   彻底解决中文字体在不同操作系统、浏览器与 DPI 缩放下
+   节点文字底部被截断、下半截消失与行高重叠问题
+------------------------------------------------------------- */
+
+/* 保证 Mermaid SVG 画布与外层容器不裁剪溢出文字 */
+.mermaid {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+}
+
+.mermaid svg {
+  overflow: visible !important;
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* 核心修复：解除 foreignObject 默认裁剪，避免文字底部被削 */
+.mermaid .node foreignObject,
+.mermaid .label foreignObject,
+.mermaid .edgeLabel foreignObject {
+  overflow: visible !important;
+}
+
+/* 统一 Mermaid 节点内部文本的行高与对齐 */
+.mermaid .node foreignObject > div {
+  line-height: 1.45 !important;
+  font-family: var(--vp-font-family-base) !important;
+  text-align: center !important;
+  word-break: break-word !important;
+  white-space: normal !important;
+}
+
+/* 修复连线文字标签背景与边距 */
+.mermaid .edgeLabel {
+  background-color: var(--vp-c-bg) !important;
+  padding: 0 4px !important;
+  border-radius: 4px;
+}

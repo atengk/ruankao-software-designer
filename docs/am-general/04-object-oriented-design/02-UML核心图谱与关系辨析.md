@@ -90,12 +90,18 @@ classDiagram
 
 ```mermaid
 flowchart TD
-    A["两个类之间存在 '部分-整体' 关系吗？"] -->|否| B["是继承关系(is-a)还是使用关系?"]
-    B -->|继承关系| C["泛化 / 实现 (空心三角)"]
-    B -->|普通使用| D["长期持有为关联，临时参数为依赖"]
-    A -->|是| E["当整体被销毁时，部分还能独立存活吗？"]
-    E -->|能独立存活| F["聚合关系 (Aggregation)<br>空心菱形 ◇ 在整体端"]
-    E -->|同生共死，不能独立存活| G["组合关系 (Composition)<br>实心菱形 ◆ 在整体端"]
+    A["两个类之间存在<br/>'整体-部分' 关系吗？"] -->|否| B["是继承关系 (is-a)<br/>还是使用关系?"]
+    B -->|继承关系| C["泛化 / 实现<br/>(空心三角箭头)"]
+    B -->|普通使用| D["长期持有为关联<br/>临时使用为依赖"]
+    A -->|是| E["当整体被销毁时<br/>部分还能独立存活吗？"]
+    E -->|能独立存活| F["聚合关系 (Aggregation)<br/>空心菱形 ◇ 在整体端"]
+    E -->|同生共死| G["组合关系 (Composition)<br/>实心菱形 ◆ 在整体端"]
+
+    style A fill:#f6f8fa,stroke:#d0d7de,stroke-width:1.5px
+    style B fill:#ddf4ff,stroke:#0969da,stroke-width:1.5px
+    style E fill:#fff8c5,stroke:#9a6700,stroke-width:1.5px
+    style F fill:#dafbe1,stroke:#1a7f37,stroke-width:1.5px
+    style G fill:#ffebe9,stroke:#cf222e,stroke-width:1.5px
 ```
 
 ### 2. 用例图三大核心关系辨析
