@@ -10,6 +10,9 @@ hero:
       text: 开启上午综合知识
       link: /am-general/
     - theme: alt
+      text: 📐 计算公式速查手册
+      link: /am-general/formula-cheat-sheet
+    - theme: alt
       text: 架构决策 (ADR)
       link: /adr/0001-上午题知识库结构与优先攻坚策略
 
