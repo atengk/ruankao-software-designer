@@ -80,10 +80,19 @@ export default withMermaid(
           ]
         },
         {
-          text: '其他大题专栏',
+          text: '试题四：C 语言算法设计与分析',
           collapsed: false,
           items: [
-            { text: '试题四：C 语言算法设计与分析', link: '/pm-application/04-algorithm-analysis/' },
+            { text: '00 战略防守法则与四大宗门识别', link: '/pm-application/04-algorithm-analysis/' },
+            { text: '01 动态规划：0-1背包与最长公共子序列', link: '/pm-application/04-algorithm-analysis/01-dynamic-programming-knapsack-lcs' },
+            { text: '02 分治与贪心：快速排序与最短路径算法', link: '/pm-application/04-algorithm-analysis/02-divide-conquer-and-greedy' },
+            { text: '03 回溯搜索：N 皇后与解空间剪枝模型', link: '/pm-application/04-algorithm-analysis/03-backtracking-n-queens' }
+          ]
+        },
+        {
+          text: '试题六：面向对象与设计模式 (Java 选做)',
+          collapsed: false,
+          items: [
             { text: '试题六：面向对象与设计模式 (Java)', link: '/pm-application/05-design-patterns-java/' }
           ]
         }
