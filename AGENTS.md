@@ -6,7 +6,7 @@
 
 ### 任务跟踪器 (Issue tracker)
 
-任务与考点需求统一在本地 Markdown 中跟踪。详见 `docs/agents/issue-tracker.md`。
+任务与考点需求统一在 GitHub Issues 中跟踪，通过 GitHub CLI (`gh issue`) 进行读取、创建、分诊与闭环。详见 `docs/agents/issue-tracker.md`。
 
 ### 分诊标签 (Triage labels)
 

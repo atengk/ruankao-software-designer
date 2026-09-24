@@ -141,7 +141,8 @@ export default defineConfig({
             { text: '0001 上午题知识库结构与优先攻坚策略', link: '/adr/0001-上午题知识库结构与优先攻坚策略' },
             { text: '0002 面向对象实战验证语言选型 (Java)', link: '/adr/0002-面向对象实战验证语言选型Java' },
             { text: '0003 上午题知识库完善与题库构建策略', link: '/adr/0003-上午题知识库完善与题库构建策略' },
-            { text: '0004 VitePress集成与全站文档目录收敛规范', link: '/adr/0004-VitePress集成与文档目录收敛规范' }
+            { text: '0004 VitePress集成与全站文档目录收敛规范', link: '/adr/0004-VitePress集成与文档目录收敛规范' },
+            { text: '0005 任务跟踪器迁移至GitHub Issues', link: '/adr/0005-任务跟踪器迁移至GitHub-Issues' }
           ]
         }
       ]
