@@ -42,7 +42,8 @@ export default defineConfig({
           text: '上午综合知识概览',
           items: [
             { text: '考情分析与学科导航', link: '/am-general/' },
-            { text: '📐 全科计算公式速查手册', link: '/am-general/formula-cheat-sheet' }
+            { text: '📐 全科计算公式速查手册', link: '/am-general/formula-cheat-sheet' },
+            { text: '🛡️ 全科高频避坑与秒杀模板库', link: '/am-general/exam-pitfalls-and-short-cuts' }
           ]
         },
         {
