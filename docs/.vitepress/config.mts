@@ -70,10 +70,19 @@ export default withMermaid(
           ]
         },
         {
+          text: '试题三：面向对象 UML 系统建模',
+          collapsed: false,
+          items: [
+            { text: '00 核心法则与图元建模方法论', link: '/pm-application/03-uml-modeling/' },
+            { text: '01 案例：智能车载导航与驾驶辅助系统', link: '/pm-application/03-uml-modeling/01-case-vehicle-navigation' },
+            { text: '02 案例：线上多渠道聚合支付网关系统', link: '/pm-application/03-uml-modeling/02-case-online-payment-gateway' },
+            { text: '03 案例：敏捷项目看板与协同研发系统', link: '/pm-application/03-uml-modeling/03-case-agile-kanban-collaboration' }
+          ]
+        },
+        {
           text: '其他大题专栏',
           collapsed: false,
           items: [
-            { text: '试题三：面向对象 UML 系统建模', link: '/pm-application/03-uml-modeling/' },
             { text: '试题四：C 语言算法设计与分析', link: '/pm-application/04-algorithm-analysis/' },
             { text: '试题六：面向对象与设计模式 (Java)', link: '/pm-application/05-design-patterns-java/' }
           ]
