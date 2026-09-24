@@ -1,6 +1,6 @@
 # 规格说明：上午综合知识科目深化、题库与公式速查表建设
 
-分诊标签: `ready-for-agent`
+分诊标签: `completed`
 
 ## 问题陈述 (Problem Statement)
 
