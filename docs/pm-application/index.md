@@ -9,7 +9,7 @@
 
 下午应用技术不是盲目刷题，而是高度标准化的系统工程分析与模式匹配。本项目遵循 [ADR 0007 架构决策](/adr/0007-下午应用技术知识库架构与Java实战工程规范)，全面锁定“稳拿盘 + 得分盘 + 算法防守 + Java 胜负手”的 57 分安全攻防模型。
 
-配套导航：[📖 首页](/) | [📐 上午计算公式手册](/am-general/formula-cheat-sheet) | [🛡️ 上午避坑秒杀库](/am-general/exam-pitfalls-and-short-cuts)
+配套导航：[📖 首页](/) | [📐 上午计算公式手册](/am-general/formula-cheat-sheet) | [🛡️ 上午避坑秒杀库](/am-general/exam-pitfalls-and-short-cuts) | [📝 下午万能采分公式](./answer-templates) | [🖥️ 机考防坑指南](./cbt-guidelines)
 :::
 
 ---

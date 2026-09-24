@@ -35,13 +35,14 @@
                                  │
                                  ▼
 ┌────────────────────────────────────────────────────────────────────────┐
-│ 阶段二：下午应用技术与 Java 实战双轨演练 (Phase 2) ── 【规划演进中 ⏳】    │
+│ 阶段二：下午应用技术与 Java 实战双轨演练 (Phase 2) ── 【已达成 100% ✅】 │
 ├────────────────────────────────────────────────────────────────────────┤
-│ • 试题一：数据流图 (DFD) 外部实体/数据存储补充与平衡原则解题模板           │
-│ • 试题二：数据库系统 E-R 模型向关系模式转换、主外键补充与 SQL 专项        │
-│ • 试题三：UML 系统建模（用例图/类图/时序图/状态图/活动图）精讲           │
-│ • 试题四：C 语言常用经典算法填空（分治/贪心/动态规划/回溯）通关攻坚       │
-│ • 试题六：面向对象设计模式填空 + Java 21 / JUnit 5 双轨可运行实操工程验证  │
+│ • 试题一：数据流图 (DFD) 核心法则 + 3 套跨业务实战精讲案例                │
+│ • 试题二：数据库系统 E-R 规范化与 SQL 约束 + 3 套典型业务案例精讲         │
+│ • 试题三：UML 耦合阶梯与用例关系 + 3 大面向对象系统矢量图谱案例           │
+│ • 试题四：C 语言算法四大宗门（DP/分治/贪心/回溯）战略防守与三大骨架       │
+│ • 试题六：面向对象设计模式 (Java) + exam-java 纯净工程 (17个单测全绿)     │
+│ • 万能采分公式手册与速记口诀 + CBT 机考上机规范与高频避坑指南             │
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -92,6 +93,18 @@
 | **MOD-08** | **法律法规与标准化** | 软件著作权归属与侵权判定、专利商标保护期、标准代号速记 | **2~4分** | 无 | [查看精要](https://atengk.github.io/ruankao-software-designer/am-general/08-ip-and-standards/) |
 | **MOD-09** | **计算机专业英语** | 高频 100+ 专业词汇矩阵、语境语法解题技巧 | **5分** | 无 | [查看精要](https://atengk.github.io/ruankao-software-designer/am-general/09-english/) |
 
+### 阶段二：下午应用技术实战模块（及格攻防 100% 达成）
+
+| 试题编号 | 题型名称 | 核心考点与案例矩阵 | 保底目标 | 成果资产与入口 |
+| :---: | :--- | :--- | :---: | :--- |
+| **试题一** | **结构化分析：数据流图 (DFD)** | 父子图平衡、黑洞/奇迹/灰洞排查、外部实体定位、3大跨业务系统实战案例 | **13~15分** | [进入专栏](https://atengk.github.io/ruankao-software-designer/pm-application/01-data-flow-diagram/) |
+| **试题二** | **数据库设计：E-R 模型与 SQL** | 1:1/1:N/M:N 转换铁律、主外键推导、范式判定、SQL 约束填空、3套经典案例 | **12~14分** | [进入专栏](https://atengk.github.io/ruankao-software-designer/pm-application/02-database-design/) |
+| **试题三** | **面向对象：UML 系统建模** | 类间耦合阶梯（聚合vs组合）、用例三大关系（包含/扩展/泛化）、3大系统矢量图谱 | **12~14分** | [进入专栏](https://atengk.github.io/ruankao-software-designer/pm-application/03-uml-modeling/) |
+| **试题四** | **算法设计与分析 (C 语言)** | 战略防守法则、四大宗门模式识别（DP/分治/贪心/回溯）、三大骨架与复杂度判别 | **7~8分** | [进入专栏](https://atengk.github.io/ruankao-software-designer/pm-application/04-algorithm-analysis/) |
+| **试题六** | **面向对象程序设计 (Java 选做)** | 7大高频模式全景分类、五空秒杀定位法、`exam-java` 纯净工程 (17个单测全绿) | **13~15分** | [进入专栏](https://atengk.github.io/ruankao-software-designer/pm-application/05-design-patterns-java/) |
+| **通关手册** | **万能采分公式与速记手册** | 全卷 5 题属性闭包、无损连接、强弱耦合、复杂度口诀等横向汇总 | — | [查看手册](https://atengk.github.io/ruankao-software-designer/pm-application/answer-templates) |
+| **机考防坑** | **上机作答规范与高频避坑** | 防漏选题号、中文全角标点排错、150分钟黄金节奏与考场应急处置 | — | [查看指南](https://atengk.github.io/ruankao-software-designer/pm-application/cbt-guidelines) |
+
 ---
 
 ## 三、 工程架构决策记录 (ADR)
@@ -104,6 +117,7 @@
 - [ADR 0004: VitePress 集成与全站文档目录收敛规范](./docs/adr/0004-VitePress集成与文档目录收敛规范.md)
 - [ADR 0005: 任务跟踪器迁移至 GitHub Issues](./docs/adr/0005-任务跟踪器迁移至GitHub-Issues.md)
 - [ADR 0006: 上午题排版视觉规范与检索式自测交互演进](./docs/adr/0006-上午题排版视觉规范与检索式自测交互演进.md)
+- [ADR 0007: 下午应用技术知识库架构与Java实战工程规范](./docs/adr/0007-下午应用技术知识库架构与Java实战工程规范.md)
 
 ---
 
