@@ -50,10 +50,19 @@ export default withMermaid(
           ]
         },
         {
-          text: '试题精解与实战专栏',
+          text: '试题一：结构化分析与数据流图 (DFD)',
           collapsed: false,
           items: [
-            { text: '试题一：结构化分析与数据流图 (DFD)', link: '/pm-application/01-data-flow-diagram/' },
+            { text: '00 核心法则与异常排查方法论', link: '/pm-application/01-data-flow-diagram/' },
+            { text: '01 案例：电商订单与在线支付系统', link: '/pm-application/01-data-flow-diagram/01-case-ecommerce-orders' },
+            { text: '02 案例：智慧医院门诊挂号收费系统', link: '/pm-application/01-data-flow-diagram/02-case-hospital-outpatient' },
+            { text: '03 案例：智能仓储入出库与物流系统', link: '/pm-application/01-data-flow-diagram/03-case-smart-warehouse' }
+          ]
+        },
+        {
+          text: '其他大题专栏',
+          collapsed: false,
+          items: [
             { text: '试题二：数据库系统设计 (E-R与SQL)', link: '/pm-application/02-database-design/' },
             { text: '试题三：面向对象 UML 系统建模', link: '/pm-application/03-uml-modeling/' },
             { text: '试题四：C 语言算法设计与分析', link: '/pm-application/04-algorithm-analysis/' },
