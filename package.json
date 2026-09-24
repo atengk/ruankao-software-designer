@@ -1,0 +1,15 @@
+{
+  "name": "ruankao-software-designer",
+  "version": "1.0.0",
+  "description": "软考软件设计师（中级）系统化备考工程与知识库",
+  "type": "module",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "markdown-it-mathjax3": "^5.2.0",
+    "vitepress": "^1.6.4"
+  }
+}

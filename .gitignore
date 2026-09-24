@@ -1,0 +1,16 @@
+# 依赖与打包产物
+node_modules/
+docs/.vitepress/dist/
+docs/.vitepress/cache/
+dist/
+cache/
+
+# 本地临时工单与临时探针
+scratch/
+
+# IDE 与操作系统
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log

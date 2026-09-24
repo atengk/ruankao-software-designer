@@ -1,0 +1,59 @@
+name: 部署 VitePress 站点到 GitHub Pages
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: 构建静态站点
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出源码
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 安装 pnpm 包管理器
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: 配置 Node.js 运行环境
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: 安装项目依赖
+        run: pnpm install --frozen-lockfile
+
+      - name: 编译构建 VitePress 站点
+        run: pnpm run docs:build
+
+      - name: 上传 GitHub Pages 产物
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/.vitepress/dist
+
+  deploy:
+    name: 部署上线
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: 执行 GitHub Pages 部署
+        id: deployment
+        uses: actions/deploy-pages@v4
