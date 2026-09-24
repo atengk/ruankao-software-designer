@@ -68,9 +68,9 @@
   margin-bottom: 0.75rem !important;
 }
 
-/* 2. 顶部徽章流 (Badges) 自动弹性排列与充裕留白 */
+/* 2. 顶部徽章流 (Badges) 独立胶囊外边距与充裕呼吸感 */
 .vp-doc .VPBadge {
-  margin: 0 !important;
+  margin: 0.25rem 0.6rem 0.5rem 0 !important;
   padding: 5px 12px !important;
   font-size: 13px !important;
   font-weight: 500 !important;
@@ -85,11 +85,22 @@
 .vp-doc p:has(.VPBadge),
 .vp-doc .badge-group {
   margin-top: 0.75rem !important;
-  margin-bottom: 2rem !important;
+  margin-bottom: 1.25rem !important;
   display: flex !important;
   flex-wrap: wrap !important;
   align-items: center !important;
   gap: 0.6rem 0.75rem !important;
+}
+
+/* 当 Badge 直接跟在标题后且未被 p 容器包裹时的呼吸感对齐 */
+.vp-doc h1 + .VPBadge,
+.vp-doc h2 + .VPBadge {
+  margin-top: 0.6rem !important;
+}
+
+.vp-doc .VPBadge + .custom-block,
+.vp-doc .VPBadge + hr {
+  margin-top: 1.25rem !important;
 }
 
 /* 3. 增强原生容器 (tip, danger, details) 的呼吸感 */

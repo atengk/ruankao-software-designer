@@ -36,27 +36,14 @@ export default withMermaid(
     nav: [
       { text: '首页', link: '/' },
       { text: '上午综合知识', link: '/am-general/' },
-      { text: '📊 机考趋势与通关策略', link: '/research/2026-ruankao-designer-exam-trends-and-strategy' },
       { text: '架构决策 (ADR)', link: '/adr/0001-上午题知识库结构与优先攻坚策略' }
     ],
     sidebar: {
-      '/research/': [
-        {
-          text: '备考调研白皮书',
-          items: [
-            { text: '📊 2026机考趋势与通关策略', link: '/research/2026-ruankao-designer-exam-trends-and-strategy' },
-            { text: '📖 上午综合知识备考导航', link: '/am-general/' },
-            { text: '📐 全科计算公式速查手册', link: '/am-general/formula-cheat-sheet' },
-            { text: '🛡️ 全科高频避坑与秒杀模板库', link: '/am-general/exam-pitfalls-and-short-cuts' }
-          ]
-        }
-      ],
       '/am-general/': [
         {
           text: '上午综合知识概览',
           items: [
             { text: '考情分析与学科导航', link: '/am-general/' },
-            { text: '📊 2026机考趋势与通关策略', link: '/research/2026-ruankao-designer-exam-trends-and-strategy' },
             { text: '📐 全科计算公式速查手册', link: '/am-general/formula-cheat-sheet' },
             { text: '🛡️ 全科高频避坑与秒杀模板库', link: '/am-general/exam-pitfalls-and-short-cuts' }
           ]
@@ -159,7 +146,8 @@ export default withMermaid(
             { text: '0003 上午题知识库完善与题库构建策略', link: '/adr/0003-上午题知识库完善与题库构建策略' },
             { text: '0004 VitePress集成与全站文档目录收敛规范', link: '/adr/0004-VitePress集成与文档目录收敛规范' },
             { text: '0005 任务跟踪器迁移至GitHub Issues', link: '/adr/0005-任务跟踪器迁移至GitHub-Issues' },
-            { text: '0006 上午题排版视觉规范与检索式自测交互演进', link: '/adr/0006-上午题排版视觉规范与检索式自测交互演进' }
+            { text: '0006 上午题排版视觉规范与检索式自测交互演进', link: '/adr/0006-上午题排版视觉规范与检索式自测交互演进' },
+            { text: '0007 下午应用技术知识库架构与Java实战工程规范', link: '/adr/0007-下午应用技术知识库架构与Java实战工程规范' }
           ]
         }
       ]
