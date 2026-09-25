@@ -12,6 +12,12 @@
     "test": "pnpm run docs:build && pnpm run test:java"
   },
   "devDependencies": {
+    "@braintree/sanitize-url": "^7.1.2",
+    "cytoscape": "^3.34.3",
+    "cytoscape-cose-bilkent": "^4.1.0",
+    "dayjs": "^1.11.23",
+    "debug": "^4.4.3",
+    "elkjs": "^0.12.0",
     "markdown-it-mathjax3": "^5.2.0",
     "mermaid": "^12.0.0",
     "vitepress": "^1.6.4",

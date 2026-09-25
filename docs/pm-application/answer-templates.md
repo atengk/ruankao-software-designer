@@ -165,16 +165,21 @@ $$\text{依赖 (Dependency)} < \text{关联 (Association)} < \text{聚合 (Aggre
 
 ```mermaid
 flowchart TD
-    HOLE1["【第 1 空】接口定义 / 抽象继承<br/>• 语法: public class B implements/extends A<br/>• 题眼: 查看类图中的三角虚线/实线继承关系"]
-    
-    HOLE2["【第 2 空】组合/聚合成员变量持有<br/>• 语法: private Strategy strategy; 或 List<Observer> obs;<br/>• 题眼: 查看类图中菱形关联持有的目标接口引用"]
-    
-    HOLE3["【第 3 空】构造器参数注入 / 属性初始化<br/>• 语法: this.strategy = strategy;<br/>• 题眼: 构造方法中完成对象的装配绑定"]
-    
-    HOLE4["【第 4 空】多态委托调用<br/>• 语法: strategy.algorithmInterface(); 或 target.request();<br/>• 题眼: 核心业务方法内部委托持有的成员变量执行操作"]
-    
-    HOLE5["【第 5 空】客户端组装与运行调用<br/>• 语法: Context c = new Context(new ConcreteStrategy());<br/>• 题眼: main 方法内部完成实例 new 创建与组装调用"]
+    HOLE1["【第 1 空】类声明与接口继承 ── implements / extends 顶层抽象基类/接口"] --> HOLE2["【第 2 空】依赖倒置成员持有 ── private Strategy strategy 持有抽象接口引用"]
+    HOLE2 --> HOLE3["【第 3 空】构造器参数注入绑定 ── this.strategy = strategy 完成装配绑定"]
+    HOLE3 --> HOLE4["【第 4 空】业务核心多态委托调用 ── strategy.doWork() 委托抽象发起调用"]
+    HOLE4 --> HOLE5["【第 5 空】客户端运行时组装调用 ── new Context(new ConcreteStrategy()) 实例化组装"]
 ```
+
+#### 试题六 Java 填空“五空秒杀定位模型”速查表
+
+| 填空空号 | 考查位点与语法特征 | UML 类图对应题眼 | 典型标准语法范例 | 考场秒杀口诀与避坑 |
+| :---: | :--- | :--- | :--- | :--- |
+| **第 1 空** | **类声明与接口继承** | 指向抽象接口的虚线三角（实现），或指向抽象基类的实线三角（继承） | `implements Strategy`<br/>`extends Decorator` | 先找顶层角色，首字母大写，辨清 `implements` 与 `extends`。 |
+| **第 2 空** | **组合/聚合成员变量持有** | 类图中 Context/Subject 指出的菱形关联线，指向抽象接口 | `private Strategy strategy;`<br/>`protected Component component;` | 依赖倒置原则（DIP）：声明类型必须是抽象接口，绝非具体实现类！ |
+| **第 3 空** | **构造器参数注入 / 初始化** | 构造方法 `public Context(...)` 的参数列表与属性赋值 | `this.strategy = strategy;`<br/>`this.observers = new ArrayList<>();` | 辨清属性名与形参名；若形参同名必须加 `this.` 显式指明成员变量。 |
+| **第 4 空** | **多态委托调用 (核心业务)** | 核心业务方法内，委托第 2 空持有的成员变量发起方法调用 | `strategy.doAlgorithm();`<br/>`component.operation();` | 绝大多数为第 2 空变量名加抽象接口中的方法，注意参数传递一致性。 |
+| **第 5 空** | **客户端装配与实例化** | 位于 `main()` 方法中，完成具体对象与上下文的组装并触发运行 | `new Context(new ConcreteStrategy());`<br/>`context.doWork();` | 认清具体策略/产品子类名，通过 `new` 完成多态注入并启动业务。 |
 
 ### 5.1 7 大高频设计模式速记矩阵
 

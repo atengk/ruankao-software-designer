@@ -24,9 +24,6 @@ hero:
     - theme: alt
       text: 🖥️ 机考防坑指南
       link: /pm-application/cbt-guidelines
-    - theme: alt
-      text: 架构决策 (ADR)
-      link: /adr/0001-上午题知识库结构与优先攻坚策略
 
 features:
   - icon: 🎯

@@ -7,8 +7,39 @@ export default withMermaid(
   lang: 'zh-CN',
   title: '软考软件设计师',
   description: '2026 年软考中级软件设计师备考知识库与双轨实战工程',
+  mermaid: {
+    suppressErrorRendering: true
+  },
   markdown: {
-    math: true
+    math: true,
+    config(md) {
+      const origInline = md.renderer.rules.math_inline;
+      if (origInline) {
+        md.renderer.rules.math_inline = (tokens, idx, options, env, self) => {
+          const raw = origInline(tokens, idx, options, env, self);
+          return raw.replace(/<style[\s\S]*?<\/style>/gi, '');
+        };
+      }
+      const origBlock = md.renderer.rules.math_block;
+      if (origBlock) {
+        md.renderer.rules.math_block = (tokens, idx, options, env, self) => {
+          const raw = origBlock(tokens, idx, options, env, self);
+          return raw.replace(/<style[\s\S]*?<\/style>/gi, '');
+        };
+      }
+    }
+  },
+  vite: {
+    optimizeDeps: {
+      include: [
+        'dayjs',
+        '@braintree/sanitize-url',
+        'debug',
+        'cytoscape',
+        'cytoscape-cose-bilkent',
+        'elkjs/lib/elk.bundled.js'
+      ]
+    }
   },
   themeConfig: {
     logo: '🎯',
@@ -36,8 +67,7 @@ export default withMermaid(
     nav: [
       { text: '首页', link: '/' },
       { text: '上午综合知识', link: '/am-general/' },
-      { text: '下午应用技术', link: '/pm-application/' },
-      { text: '架构决策 (ADR)', link: '/adr/0001-上午题知识库结构与优先攻坚策略' }
+      { text: '下午应用技术', link: '/pm-application/' }
     ],
     sidebar: {
       '/pm-application/': [

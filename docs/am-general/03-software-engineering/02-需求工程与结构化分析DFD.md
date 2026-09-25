@@ -1,4 +1,4 @@
-﻿# 考点精要：需求工程与结构化分析 DFD
+# 考点精要：需求工程与结构化分析 DFD
 
 <Badge type="info" text="MOD-03 软件工程" />
 <Badge type="tip" text="考查题号：上午第 18 ~ 20 题 (约 2 ~ 3 分)" />
@@ -61,13 +61,13 @@
 
 ```mermaid
 flowchart LR
-    subgraph 黑洞缺陷 (只有入无出)
+    subgraph "黑洞缺陷 (只有入无出)"
         IN1["数据流输入"] --> P1(("加工 P1"))
     end
-    subgraph 奇迹白洞缺陷 (无中生有)
+    subgraph "奇迹白洞缺陷 (无中生有)"
         P2(("加工 P2")) --> OUT2["数据流输出"]
     end
-    subgraph 灰洞缺陷 (输入不足以产出)
+    subgraph "灰洞缺陷 (输入不足以产出)"
         IN3["考卷分数"] --> P3(("加工 P3<br>(生成成绩单)")) --> OUT3["成绩单(含姓名班级总评)"]
     end
 ```

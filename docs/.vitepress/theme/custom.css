@@ -4,18 +4,23 @@
    节点文字底部被截断、下半截消失与行高重叠问题
 ------------------------------------------------------------- */
 
-/* 保证 Mermaid SVG 画布与外层容器不裁剪溢出文字 */
+/* 保证 Mermaid SVG 画布居中，克制最大宽度，避免简单图表粗暴撑满全屏 */
 .mermaid {
   display: flex;
   justify-content: center;
+  align-items: center;
   margin: 1.75rem 0 !important;
   overflow-x: auto;
 }
 
+/* 保证 Mermaid SVG 画布居中，尊重自身固有内容宽度，严禁粗暴拉大成巨婴 */
 .mermaid svg {
+  display: block;
+  margin: 0 auto;
   overflow: visible !important;
-  max-width: 100% !important;
   height: auto !important;
+  /* 仅设置视口兜底，绝不使用 !important 粗暴覆盖 Mermaid 内联 style="max-width: xxxpx" */
+  max-width: 100%;
 }
 
 /* 核心修复：解除 foreignObject 默认裁剪，避免文字底部被削 */
@@ -34,11 +39,27 @@
   white-space: normal !important;
 }
 
-/* 修复连线文字标签背景与边距 */
+/* 彻底清除 Mermaid 默认连线标签的灰色矩形背景，与 VitePress 主题底色完全融为一体 */
 .mermaid .edgeLabel {
   background-color: var(--vp-c-bg) !important;
-  padding: 0 4px !important;
+  color: var(--vp-c-text-1) !important;
+  padding: 2px 6px !important;
   border-radius: 4px;
+}
+
+.mermaid .edgeLabel rect,
+.mermaid .label-container {
+  fill: var(--vp-c-bg) !important;
+  background-color: var(--vp-c-bg) !important;
+  stroke: none !important;
+  opacity: 1 !important;
+}
+
+.mermaid .edgeLabel span,
+.mermaid .edgeLabel p,
+.mermaid .edgeLabel div {
+  background-color: transparent !important;
+  color: var(--vp-c-text-1) !important;
 }
 
 /* -------------------------------------------------------------
@@ -149,10 +170,156 @@ mjx-assistive-mml {
   pointer-events: none !important;
 }
 
-/* 保证 MathJax SVG 容器垂直居中对齐 */
+/* 保证 MathJax SVG 容器垂直居中对齐与颜色继承，防止公式异常隐形 */
 mjx-container[jax="SVG"] {
   display: inline-block !important;
   vertical-align: -0.15em !important;
   line-height: 0 !important;
+}
+
+mjx-container[jax="SVG"] > svg {
+  fill: currentColor !important;
+  color: inherit !important;
+  display: inline-block !important;
+  overflow: visible !important;
+}
+
+/* -------------------------------------------------------------
+   沉浸式宽屏模式 (Zen / Immersive Mode) 样式支持
+   点击顶部导航栏【沉浸全宽 / 还原侧栏】或快捷键 Alt+Z 触发
+------------------------------------------------------------- */
+
+/* 1. 平滑动画过渡 */
+.VPSidebar {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.VPDoc.has-sidebar {
+  transition: padding-left 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+
+
+/* 2. 激活沉浸模式时的侧栏与导读彻底收起，消除主容器左侧 padding */
+:is(html, body).is-zen-mode .VPSidebar {
+  transform: translateX(-100%) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* 沉浸全宽模式：导航栏全局实底背景与完整底边框，杜绝滚动时正文穿透重叠 */
+:is(html, body).is-zen-mode .VPNav {
+  background-color: var(--vp-nav-bg-color) !important;
+}
+
+:is(html, body).is-zen-mode .VPNavBar,
+:is(html, body).is-zen-mode .VPNavBar:not(.home),
+:is(html, body).is-zen-mode .VPNavBar.has-sidebar {
+  background-color: var(--vp-nav-bg-color) !important;
+  border-bottom: 1px solid var(--vp-c-gutter) !important;
+}
+
+:is(html, body).is-zen-mode .VPNavBar .title,
+:is(html, body).is-zen-mode .VPNavBar.has-sidebar .title {
+  background-color: var(--vp-nav-bg-color) !important;
+}
+
+:is(html, body).is-zen-mode .VPNavBar .content-body {
+  background-color: var(--vp-nav-bg-color) !important;
+}
+
+:is(html, body).is-zen-mode .VPNavBarTitle .title {
+  border-bottom-color: transparent !important;
+}
+
+:is(html, body).is-zen-mode .VPNavBar.has-sidebar .divider {
+  display: none !important;
+}
+
+:is(html, body).is-zen-mode .VPContent.has-sidebar {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* 右侧大纲栏彻底隐藏不占位 */
+:is(html, body).is-zen-mode .VPDoc .aside,
+:is(html, body).is-zen-mode .VPDocAside {
+  display: none !important;
+}
+
+/* 中间正文容器彻底解绑，放宽到 100% 及 1440px 巨幕全宽 */
+:is(html, body).is-zen-mode .VPDoc .container {
+  max-width: 1440px !important;
+  width: 100% !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
+
+:is(html, body).is-zen-mode .VPDoc .content {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding-left: 36px !important;
+  padding-right: 36px !important;
+}
+
+:is(html, body).is-zen-mode .VPDoc .content-container,
+:is(html, body).is-zen-mode .VPDoc.has-aside .content-container {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+:is(html, body).is-zen-mode .vp-doc {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* 3. 普通模式下的大屏自适应宽度放宽 (>=1440px / >=1680px) */
+@media (min-width: 1440px) {
+  .VPDoc:not(.has-sidebar) .content-container {
+    max-width: 1200px !important;
+  }
+  .VPDoc.has-sidebar .content-container {
+    max-width: 860px !important;
+  }
+}
+
+@media (min-width: 1680px) {
+  .VPDoc.has-sidebar .content-container {
+    max-width: 960px !important;
+  }
+}
+
+/* -------------------------------------------------------------
+   表格横向呼吸感与防挤压换行加固 (Responsive Tables)
+   彻底杜绝考点分类首列被压缩成单字竖排惨状
+------------------------------------------------------------- */
+.vp-doc table {
+  display: table !important;
+  width: 100% !important;
+  min-width: 100% !important;
+  border-collapse: collapse;
+  margin: 1.5rem 0 !important;
+  box-sizing: border-box;
+}
+
+/* 核心防挤压：表格首列（分类/考点/序号）绝不允许汉字单字竖排 */
+.vp-doc table th:first-child,
+.vp-doc table td:first-child {
+  white-space: nowrap !important;
+  min-width: 110px !important;
+  font-weight: 600;
+}
+
+/* 考点与公式表格关键单元格填充与字距 */
+.vp-doc table th,
+.vp-doc table td {
+  padding: 10px 14px !important;
+  line-height: 1.6 !important;
+}
+
+.vp-doc table td code {
+  white-space: nowrap;
 }
 
