@@ -1,18 +1,161 @@
-import { defineConfig } from 'vitepress'
-import { withMermaid } from 'vitepress-plugin-mermaid'
+/**
+ * VitePress 站点核心配置 (软考软件设计师备考知识库)
+ * 基于 VitePress Zenith 旗舰级架构构建
+ * @author Ateng
+ * @since 2026-09-29
+ */
 
-export default withMermaid(
-  defineConfig({
-  base: '/ruankao-software-designer/',
-  lang: 'zh-CN',
+import { defineConfig } from 'vitepress'
+import { withPwa } from '@vite-pwa/vitepress'
+import UnoCSS from 'unocss/vite'
+import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
+
+const base = process.env.BASE_PATH || '/ruankao-software-designer/'
+
+/**
+ * Zenith 旗舰级特性开关矩阵 (Zenith Feature Switches)
+ * 遵循极简与渐进式原则，统一管控软考备考场景下的全站特性
+ */
+const zenithConfig = {
+  // 1. 进阶/特定场景特性（默认关闭）
+  i18n: false,              // 国际化多语言矩阵：关闭（纯中文备考）
+  versionSwitcher: false,   // 多版本管理与归档横幅：关闭
+  helpful: false,           // 文档有用度评价：关闭
+  zenModeToggle: false,     // 右下角专注模式悬浮球：关闭（顶部悬浮感应胶囊与快捷键 Alt+Z 已完全满足）
+  contributors: false,      // 开源贡献者致谢流：关闭
+  themePicker: true,        // 顶栏主题强调色盘选择器：开启（支持自选备考强调色）
+  banner: false,            // 顶部全宽公告通知横幅：关闭
+  pwaStatus: false,         // PWA 安装横幅提示：关闭（静默离线工作）
+
+  // 2. 旗舰阅读与做题体验特性（默认开启）
+  commandPalette: true,     // 全局快捷命令中心浮层 (<VpCommandPalette>)：开启
+  blog: false,              // 博客系统：关闭（知识库纯粹聚焦于备考体系）
+  mediumZoom: true,         // 正文插图平滑点击放大灯箱：开启（优化 DFD/ER/UML 检视）
+  readingMetrics: true,     // 阅读认知指标（字数与预计耗时 DocMeta）：开启
+  readingProgressBar: true, // 页面顶部流光阅读进度条：开启
+  linkPreview: true,        // 站内内链卡片悬浮预览：开启
+  keyboardShortcuts: true,  // 全键盘极客导航与速查浮层：开启
+  codeFolding: true,        // 超长代码块自适应高度约束与内滚动：开启（优化算法长代码阅读）
+  zenMode: true,            // 沉浸式专注阅读模式（顶部感应胶囊/Alt+Z）：开启
+}
+
+export default withPwa(defineConfig({
   title: '软考软件设计师',
   description: '2026 年软考中级软件设计师备考知识库与双轨实战工程',
-  mermaid: {
-    suppressErrorRendering: true
+  lang: 'zh-CN',
+  base,
+
+  pwa: {
+    outDir: '.vitepress/dist',
+    registerType: 'autoUpdate',
+    includeAssets: ['logo.svg'],
+    manifest: {
+      id: base,
+      name: '软考软件设计师备考知识库',
+      short_name: '软考知识库',
+      description: '2026 年软考中级软件设计师备考知识库与双轨实战工程',
+      theme_color: '#6366f1',
+      background_color: '#0f172a',
+      display: 'standalone',
+      orientation: 'portrait',
+      start_url: base,
+      scope: base,
+      lang: 'zh-CN',
+      categories: ['education', 'productivity'],
+      icons: [
+        {
+          src: `${base}logo.svg`,
+          sizes: 'any',
+          type: 'image/svg+xml',
+          purpose: 'any',
+        },
+        {
+          src: `${base}logo.svg`,
+          sizes: 'any',
+          type: 'image/svg+xml',
+          purpose: 'maskable',
+        },
+      ],
+    },
+    workbox: {
+      globPatterns: ['**/*.{css,js,html,svg,png,ico,txt,woff2}'],
+      runtimeCaching: [
+        {
+          urlPattern: ({ request }) =>
+            request.destination === 'style' ||
+            request.destination === 'script' ||
+            request.destination === 'worker',
+          handler: 'StaleWhileRevalidate',
+          options: {
+            cacheName: 'static-resources',
+            expiration: {
+              maxEntries: 120,
+              maxAgeSeconds: 30 * 24 * 60 * 60,
+            },
+            cacheableResponse: {
+              statuses: [0, 200],
+            },
+          },
+        },
+        {
+          urlPattern: ({ request }) => request.destination === 'image',
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'images-cache',
+            expiration: {
+              maxEntries: 100,
+              maxAgeSeconds: 60 * 24 * 60 * 60,
+            },
+            cacheableResponse: {
+              statuses: [0, 200],
+            },
+          },
+        },
+        {
+          urlPattern: ({ url }) =>
+            url.origin === 'https://fonts.googleapis.com' ||
+            url.origin === 'https://fonts.gstatic.com',
+          handler: 'StaleWhileRevalidate',
+          options: {
+            cacheName: 'google-fonts',
+            expiration: {
+              maxEntries: 30,
+              maxAgeSeconds: 365 * 24 * 60 * 60,
+            },
+            cacheableResponse: {
+              statuses: [0, 200],
+            },
+          },
+        },
+        {
+          urlPattern: ({ url }) => url.origin === 'https://cdn.jsdelivr.net',
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'jsdelivr-cdn',
+            expiration: {
+              maxEntries: 50,
+              maxAgeSeconds: 30 * 24 * 60 * 60,
+            },
+            cacheableResponse: {
+              statuses: [0, 200],
+            },
+          },
+        },
+      ],
+    },
+    experimental: {
+      includeAllowlist: true,
+    },
   },
+
   markdown: {
     math: true,
+    lineNumbers: true,
+    codeTransformers: [
+      transformerTwoslash(),
+    ],
     config(md) {
+      // 1. MathJax <style> 标签去重拦截函数（彻底杜绝内联公式样式重复膨胀）
       const origInline = md.renderer.rules.math_inline;
       if (origInline) {
         md.renderer.rules.math_inline = (tokens, idx, options, env, self) => {
@@ -27,48 +170,135 @@ export default withMermaid(
           return raw.replace(/<style[\s\S]*?<\/style>/gi, '');
         };
       }
-    }
+
+      // 2. 自研 Mermaid 与 Markmap 矢量组件拦截管线
+      const defaultFence = md.renderer.rules.fence!
+      md.renderer.rules.fence = (tokens, idx, options, env, self) => {
+        const token = tokens[idx]
+        const lang = token.info.trim().split(/\s+/)[0]
+        if (lang === 'mermaid') {
+          const key = `mermaid-${idx}`
+          const code = encodeURIComponent(token.content)
+          return `<Mermaid id="${key}" code="${code}" />\n`
+        }
+        if (lang === 'markmap') {
+          const key = `markmap-${idx}`
+          const code = encodeURIComponent(token.content)
+          return `<Markmap id="${key}" code="${code}" />\n`
+        }
+        const rendered = defaultFence(tokens, idx, options, env, self)
+
+        // 修复 VitePress 内置 lineNumberPlugin 在结合 Twoslash 时行号提前截断的缺陷
+        const wrapperIdx = rendered.indexOf('<div class="line-numbers-wrapper"')
+        if (wrapperIdx !== -1) {
+          const matchStartLineNumber = token.info.match(/=(\d+)/)
+          const startLineNumber = matchStartLineNumber ? parseInt(matchStartLineNumber[1], 10) : 1
+          const codeBeforeWrapper = rendered.slice(0, wrapperIdx)
+          const cleanCode = codeBeforeWrapper
+            .replace(/<template\s+(?:v-slot:popper|#popper)[\s\S]*?<\/template>/g, '')
+            .replace(/<span\s+class="[^"]*twoslash-floating[^"]*"[\s\S]*?<\/span>\s*<\/span>\s*<\/span>/g, '')
+          const lineMatches = cleanCode.match(/class="line(?:\s+[^"]*)?"/g)
+          const rawLines = token.content.replace(/\r\n/g, '\n').replace(/\n$/, '').split('\n').length
+          const lineCount = lineMatches ? lineMatches.length : rawLines
+
+          const lineNumbersCode = Array.from(
+            { length: lineCount },
+            (_, i) => `<span class="line-number">${i + startLineNumber}</span><br>`
+          ).join('')
+
+          return rendered.replace(
+            /<div class="line-numbers-wrapper"[^>]*>[\s\S]*?<\/div>/,
+            `<div class="line-numbers-wrapper" aria-hidden="true">${lineNumbersCode}</div>`
+          )
+        }
+
+        return rendered
+      }
+    },
   },
-  vite: {
-    optimizeDeps: {
-      include: [
-        'dayjs',
-        '@braintree/sanitize-url',
-        'debug',
-        'cytoscape',
-        'cytoscape-cose-bilkent',
-        'elkjs/lib/elk.bundled.js'
-      ]
-    }
-  },
+
+  head: [
+    ['meta', { name: 'theme-color', content: '#6366f1' }],
+    ['link', { rel: 'icon', href: `${base}logo.svg` }],
+    ['link', { rel: 'apple-touch-icon', href: `${base}logo.svg` }],
+    ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
+    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' }],
+    ['meta', { name: 'apple-mobile-web-app-title', content: '软考知识库' }],
+    ['meta', { name: 'keywords', content: '软考, 软件设计师, 中级软考, 计算机体系结构, 操作系统, 数据库, 软件工程, 面向对象, 数据结构, 算法, DFD, UML, 设计模式, Java' }],
+    // 防闪烁 (Anti-FOUC) 色盘极速恢复脚本
+    ['script', {}, `(function(){try{var p=localStorage.getItem('zenith-theme-palette');if(p&&p!=='indigo'){document.documentElement.dataset.themePalette=p;}}catch(e){}})();`],
+  ],
+
   themeConfig: {
     logo: '🎯',
     siteTitle: '软考软件设计师备考',
+    zenith: zenithConfig,
+
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/atengk/ruankao-software-designer' }
+    ],
+
+    // 本地全文检索（集成 Intl.Segmenter 高精度中文词法切分）
     search: {
       provider: 'local',
       options: {
-        translations: {
-          button: {
-            buttonText: '搜索文档',
-            buttonAriaLabel: '搜索文档'
+        locales: {
+          root: {
+            translations: {
+              button: {
+                buttonText: '搜索文档',
+                buttonAriaLabel: '搜索文档',
+              },
+              modal: {
+                displayDetails: '显示详细列表',
+                resetButtonTitle: '重置搜索',
+                backButtonTitle: '关闭搜索',
+                noResultsText: '无法找到相关结果',
+                footer: {
+                  selectText: '选择',
+                  selectKeyAriaLabel: '回车键',
+                  navigateText: '切换',
+                  navigateUpKeyAriaLabel: '向上箭头',
+                  navigateDownKeyAriaLabel: '向下箭头',
+                  closeText: '关闭',
+                  closeKeyAriaLabel: '退出键',
+                },
+              },
+            },
           },
-          modal: {
-            noResultsText: '无法找到相关结果',
-            resetButtonTitle: '清除查询条件',
-            footer: {
-              selectText: '选择',
-              navigateText: '切换',
-              closeText: '关闭'
-            }
-          }
-        }
-      }
+        },
+        miniSearch: {
+          options: {
+            tokenize(text) {
+              if (typeof text !== 'string') return []
+              if (/[\u4e00-\u9fa5]/.test(text) && typeof Intl !== 'undefined' && Intl.Segmenter) {
+                const segmenter = new Intl.Segmenter('zh-CN', { granularity: 'word' })
+                const tokens: string[] = []
+                for (const { segment } of segmenter.segment(text)) {
+                  const s = segment.trim()
+                  if (s) tokens.push(s.toLowerCase())
+                }
+                return tokens
+              }
+              return text.toLowerCase().split(/[\s,./\\;:'"[\]{}|`~!@#$%^&*()_+\-=?<>]+/).filter(Boolean)
+            },
+          },
+          searchOptions: {
+            fuzzy: 0.2,
+            prefix: true,
+            boost: { title: 4, text: 2, titles: 1 },
+          },
+        },
+      },
     },
+
     nav: [
       { text: '首页', link: '/' },
       { text: '上午综合知识', link: '/am-general/' },
-      { text: '下午应用技术', link: '/pm-application/' }
+      { text: '下午应用技术', link: '/pm-application/' },
+      { text: '架构决策 (ADR)', link: '/adr/0001-上午题知识库结构与优先攻坚策略' }
     ],
+
     sidebar: {
       '/pm-application/': [
         {
@@ -235,14 +465,13 @@ export default withMermaid(
             { text: '0004 VitePress集成与全站文档目录收敛规范', link: '/adr/0004-VitePress集成与文档目录收敛规范' },
             { text: '0005 任务跟踪器迁移至GitHub Issues', link: '/adr/0005-任务跟踪器迁移至GitHub-Issues' },
             { text: '0006 上午题排版视觉规范与检索式自测交互演进', link: '/adr/0006-上午题排版视觉规范与检索式自测交互演进' },
-            { text: '0007 下午应用技术知识库架构与Java实战工程规范', link: '/adr/0007-下午应用技术知识库架构与Java实战工程规范' }
+            { text: '0007 下午应用技术知识库架构与Java实战工程规范', link: '/adr/0007-下午应用技术知识库架构与Java实战工程规范' },
+            { text: '0008 知识库工程底座升级迁移至VitePress-Zenith旗舰架构', link: '/adr/0008-知识库工程底座升级迁移至VitePress-Zenith旗舰架构' }
           ]
         }
       ]
     },
-    socialLinks: [
-      { icon: 'github', link: 'https://github.com/atengk/ruankao-software-designer' }
-    ],
+
     footer: {
       message: '全国计算机技术与软件专业技术资格（水平）考试 · 软件设计师（中级）',
       copyright: '版权所有 © 2026 Ateng. 基于 VitePress 构建.'
@@ -255,5 +484,11 @@ export default withMermaid(
       level: [2, 3],
       label: '本页导读'
     }
-  }
+  },
+
+  vite: {
+    plugins: [
+      UnoCSS(),
+    ],
+  },
 }))

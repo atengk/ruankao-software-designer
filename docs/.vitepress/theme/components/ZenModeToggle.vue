@@ -1,113 +1,143 @@
-<template>
-  <button
-    class="zen-mode-toggle"
-    :class="{ 'is-active': isZen }"
-    :title="isZen ? '还原双侧栏 (快捷键 Alt+Z)' : '收起双侧栏 · 进入宽屏沉浸模式 (快捷键 Alt+Z)'"
-    @click="toggleZenMode"
-  >
-    <span class="icon">{{ isZen ? '📖' : '🖥️' }}</span>
-    <span class="text">{{ isZen ? '还原侧栏' : '沉浸全宽' }}</span>
-  </button>
-</template>
+<!--
+ * 沉浸式阅读模式悬浮切换胶囊按钮
+ * @author Ateng
+ * @since 2026-09-25
+-->
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { computed } from 'vue'
+import { useRoute } from 'vitepress'
+import { useZenMode } from '../composables/useZenMode'
 
-const STORAGE_KEY = 'ruankao_zen_mode_state'
-const isZen = ref(false)
+const route = useRoute()
+const { isZenMode, toggleZenMode } = useZenMode()
 
-const applyZenMode = (active: boolean) => {
-  isZen.value = active
-  if (typeof document !== 'undefined') {
-    document.documentElement.classList.remove('is-zen-mode')
-    if (active) {
-      document.body.classList.add('is-zen-mode')
-    } else {
-      document.body.classList.remove('is-zen-mode')
-    }
-  }
-}
-
-const toggleZenMode = () => {
-  const next = !isZen.value
-  applyZenMode(next)
-  if (typeof localStorage !== 'undefined') {
-    localStorage.setItem(STORAGE_KEY, next ? 'true' : 'false')
-  }
-}
-
-const handleKeydown = (e: KeyboardEvent) => {
-  // 支持 Alt + Z 快捷键快速切换沉浸模式
-  if (e.altKey && (e.key === 'z' || e.key === 'Z')) {
-    e.preventDefault()
-    toggleZenMode()
-  }
-}
-
-onMounted(() => {
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY)
-    if (saved === 'true') {
-      applyZenMode(true)
-    }
-  } catch {
-    // 忽略安全策略限制异常
-  }
-  window.addEventListener('keydown', handleKeydown)
-})
-
-onUnmounted(() => {
-  if (typeof window !== 'undefined') {
-    window.removeEventListener('keydown', handleKeydown)
-  }
-})
+// 仅在非首页文档页面展示悬浮切换胶囊
+const isVisible = computed(() => route.path !== '/')
 </script>
+
+<template>
+  <Teleport to="body">
+    <transition name="zen-fade">
+      <button
+        v-if="isVisible"
+        type="button"
+        class="zen-mode-toggle"
+        :class="{ active: isZenMode }"
+        :title="isZenMode ? '退出沉浸模式 (快捷键: Alt+Z 或 Esc)' : '开启沉浸式专注阅读 (快捷键: Alt+Z)'"
+        @click="toggleZenMode"
+      >
+        <span class="icon" aria-hidden="true">
+          <svg
+            v-if="!isZenMode"
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+          </svg>
+          <svg
+            v-else
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M4 14h6v6M20 10h-6V4M14 10l7-7M3 21l7-7" />
+          </svg>
+        </span>
+        <span class="label">{{ isZenMode ? '退出专注' : '专注阅读' }}</span>
+        <span class="shortcut">Alt+Z</span>
+      </button>
+    </transition>
+  </Teleport>
+</template>
 
 <style scoped>
 .zen-mode-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 80;
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 3px 10px;
-  height: 28px;
-  margin-left: 8px;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--vp-c-text-2);
-  background-color: var(--vp-c-bg-alt);
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 9999px;
   border: 1px solid var(--vp-c-divider);
-  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--vp-c-text-1);
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
   user-select: none;
 }
 
+:root.dark .zen-mode-toggle {
+  background: rgba(30, 30, 36, 0.85);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.28);
+}
+
 .zen-mode-toggle:hover {
+  border-color: var(--vp-c-brand-1);
   color: var(--vp-c-brand-1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--vp-c-brand-soft);
+}
+
+.zen-mode-toggle.active {
+  background: var(--vp-c-brand-1);
   border-color: var(--vp-c-brand-1);
-  background-color: var(--vp-c-bg-mute);
+  color: #ffffff;
 }
 
-.zen-mode-toggle.is-active {
-  color: #fff;
-  background-color: var(--vp-c-brand-1);
-  border-color: var(--vp-c-brand-1);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+.zen-mode-toggle.active:hover {
+  background: var(--vp-c-brand-2);
 }
 
-.zen-mode-toggle .icon {
-  font-size: 13px;
-  line-height: 1;
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.zen-mode-toggle .text {
-  line-height: 1;
+.shortcut {
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-2);
+  margin-left: 2px;
 }
 
-/* 屏幕较小时（< 960px 移动端），VitePress 侧栏原本已是抽屉折叠，无需此按钮 */
-@media (max-width: 959px) {
-  .zen-mode-toggle {
-    display: none;
-  }
+.zen-mode-toggle.active .shortcut {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.zen-fade-enter-active,
+.zen-fade-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.zen-fade-enter-from,
+.zen-fade-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
 }
 </style>

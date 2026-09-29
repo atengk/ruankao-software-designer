@@ -1,0 +1,302 @@
+/**
+ * 全局样式增强与中文排版微调
+ * @author Ateng
+ * @since 2026-09-25
+ */
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* 杜绝中文负字间距与压迫感 */
+body, h1, h2, h3, h4, h5, h6, p, li {
+  letter-spacing: 0.01em;
+}
+
+/* 首页 Hero 渐变微光视觉增强 */
+:root {
+  --vp-home-hero-image-background-image: linear-gradient(135deg, rgba(99, 102, 241, 0.35) 0%, rgba(236, 72, 153, 0.25) 50%, rgba(6, 182, 212, 0.3) 100%);
+  --vp-home-hero-image-filter: blur(52px);
+}
+
+.VPHero .name {
+  background: linear-gradient(135deg, var(--vp-c-brand-1) 0%, #ec4899 50%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.VPHero .image-container {
+  width: 100%;
+  max-width: 380px;
+  height: 100%;
+  max-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.VPHero .image-src {
+  width: 100% !important;
+  max-width: 320px !important;
+  max-height: 320px !important;
+  filter: drop-shadow(0 16px 32px rgba(79, 70, 229, 0.28));
+  animation: hero-logo-float 5s ease-in-out infinite;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.VPHero .image-src:hover {
+  transform: translate(-50%, -50%) scale(1.04) translateY(-4px);
+}
+
+@keyframes hero-logo-float {
+  0%, 100% {
+    transform: translate(-50%, -50%) translateY(0);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(-10px);
+  }
+}
+
+/* 首页特性卡片悬浮高光过渡 */
+.VPFeatures .VPFeature {
+  border: 1px solid var(--vp-c-bg-soft);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.VPFeatures .VPFeature:hover {
+  border-color: var(--vp-c-brand-1);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -10px var(--vp-c-brand-soft);
+}
+
+/* Medium-zoom 插图点击灯箱层级与视觉增强 */
+.medium-zoom-overlay {
+  z-index: 100 !important;
+  backdrop-filter: blur(4px);
+}
+
+.medium-zoom-image--opened {
+  z-index: 101 !important;
+  border-radius: 6px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+.vp-doc img {
+  cursor: zoom-in;
+  border-radius: 6px;
+}
+
+.vp-doc img.no-zoom,
+.vp-doc img.logo {
+  cursor: default;
+}
+
+/* 全局顶部公告横幅高度平滑响应过渡 */
+:root {
+  --vp-layout-top-height: 0px;
+}
+
+.VPNav {
+  transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.5s;
+}
+
+.VPSidebar {
+  transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --------------------------------------------------------------------------
+ * 顶栏控制区布局与呼吸感微调 (NavBar Controls Spacing & Divider)
+ * 解决调色盘与社交链接贴脸碰撞、负边距吞噬间隙的问题，提供通透优雅的呼吸感
+ * -------------------------------------------------------------------------- */
+@media (min-width: 1280px) {
+  /* 消除社交外链原生的 -8px 负边距，恢复正常容器边界 */
+  .VPNavBar .social-links {
+    margin-right: 0 !important;
+  }
+
+  /* 调色盘组件容器增加呼吸间距与微细分割线 */
+  .VPNavBar .vp-theme-picker {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 4px;
+  }
+
+  /* 在社交链接与调色盘之间添加高度 24px 的优雅微分割线，与左侧外观分割线完美呼应 */
+  .VPNavBar .vp-theme-picker::before {
+    content: "";
+    display: block;
+    margin-right: 12px;
+    margin-left: 8px;
+    width: 1px;
+    height: 24px;
+    background-color: var(--vp-c-divider);
+    flex-shrink: 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+ * 多媒体深浅色自适应与排版美化 (Media Adaptations & Modern Styling)
+ * -------------------------------------------------------------------------- */
+
+/* 1. 深浅色模式专用图片交替显隐 */
+html:not(.dark) .dark-only,
+html.dark .light-only {
+  display: none !important;
+}
+
+/* 2. 正文原生视频自适应容器与高质感圆角 */
+.vp-doc video {
+  display: block;
+  max-width: 100%;
+  margin: 20px 0;
+  border-radius: 12px;
+  border: 1px solid var(--vp-c-divider);
+  background-color: #000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* 3. 正文原生第三方流媒体嵌入 iframe 容器保底 */
+.vp-doc .vp-video-responsive,
+.vp-doc iframe.vp-video-embed {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  border: 1px solid var(--vp-c-divider);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* -------------------------------------------------------------
+   软考知识库专用排版与视觉优化 (Exam Docs Typography & Spacing)
+------------------------------------------------------------- */
+
+/* 1. 顶部徽章流 (Badges) 独立胶囊外边距与充裕呼吸感 */
+.vp-doc .VPBadge {
+  margin: 0.25rem 0.6rem 0.5rem 0 !important;
+  padding: 5px 12px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  line-height: 1.4 !important;
+  border-radius: 6px !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.vp-doc p:has(.VPBadge),
+.vp-doc .badge-group {
+  margin-top: 0.75rem !important;
+  margin-bottom: 1.25rem !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 0.6rem 0.75rem !important;
+}
+
+.vp-doc h1 + .VPBadge,
+.vp-doc h2 + .VPBadge {
+  margin-top: 0.6rem !important;
+}
+
+.vp-doc .VPBadge + .custom-block,
+.vp-doc .VPBadge + hr {
+  margin-top: 1.25rem !important;
+}
+
+/* 2. 增强原生容器 (tip, danger, details) 的呼吸感 */
+.vp-doc .custom-block {
+  margin: 1.75rem 0 !important;
+  padding: 1rem 1.25rem !important;
+  border-radius: 8px !important;
+  line-height: 1.7 !important;
+}
+
+.vp-doc .custom-block summary {
+  cursor: pointer;
+  font-weight: 600;
+  padding: 0.25rem 0;
+}
+
+/* 3. 真题选项列表优雅分层 */
+.vp-doc ul {
+  padding-left: 1.25rem;
+  margin: 0.75rem 0 1.25rem 0;
+}
+
+.vp-doc ul > li {
+  margin: 0.4rem 0 !important;
+  line-height: 1.65 !important;
+}
+
+/* -------------------------------------------------------------
+   MathJax 数学公式无障碍元素隐藏 (彻底消除 nn, kk, 2^k 2^k 重影)
+------------------------------------------------------------- */
+mjx-assistive-mml {
+  display: none !important;
+  visibility: hidden !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  clip-path: inset(50%) !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+  pointer-events: none !important;
+}
+
+/* 保证 MathJax SVG 容器垂直居中对齐与颜色继承，防止公式异常隐形 */
+mjx-container[jax="SVG"] {
+  display: inline-block !important;
+  vertical-align: -0.15em !important;
+  line-height: 0 !important;
+}
+
+mjx-container[jax="SVG"] > svg {
+  fill: currentColor !important;
+  color: inherit !important;
+  display: inline-block !important;
+  overflow: visible !important;
+}
+
+/* -------------------------------------------------------------
+   表格横向呼吸感与防挤压换行加固 (Responsive Tables)
+   彻底杜绝考点分类首列被压缩成单字竖排惨状
+------------------------------------------------------------- */
+.vp-doc table {
+  display: table !important;
+  width: 100% !important;
+  min-width: 100% !important;
+  border-collapse: collapse;
+  margin: 1.5rem 0 !important;
+  box-sizing: border-box;
+}
+
+/* 核心防挤压：表格首列（分类/考点/序号）绝不允许汉字单字竖排 */
+.vp-doc table th:first-child,
+.vp-doc table td:first-child {
+  white-space: nowrap !important;
+  min-width: 110px !important;
+  font-weight: 600;
+}
+
+/* 考点与公式表格关键单元格填充与字距 */
+.vp-doc table th,
+.vp-doc table td {
+  padding: 10px 14px !important;
+  line-height: 1.6 !important;
+}
+
+.vp-doc table td code {
+  white-space: nowrap;
+}
+
+
+
+
