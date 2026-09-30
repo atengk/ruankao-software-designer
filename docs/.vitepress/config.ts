@@ -221,6 +221,7 @@ export default withPwa(defineConfig({
     ['meta', { name: 'theme-color', content: '#6366f1' }],
     ['link', { rel: 'icon', href: `${base}logo.svg` }],
     ['link', { rel: 'apple-touch-icon', href: `${base}logo.svg` }],
+    ['meta', { name: 'mobile-web-app-capable', content: 'yes' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' }],
     ['meta', { name: 'apple-mobile-web-app-title', content: '软考知识库' }],
